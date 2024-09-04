@@ -1,0 +1,27 @@
+{{define "title"}}Search a Snippet{{end}}
+
+{{define "main"}}
+<form action="/snippet/search" method="GET">
+    <div class="search-container">
+        <input type="text" name="search" value="{{.Search}}" placeholder="Search for snippets">
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+{{if .Snippets}}
+<ul>
+    {{range .Snippets}}
+    <div class='snippet'>
+        <div class='metadata'>
+            <strong><a href="/snippet/view/{{.ID}}">{{.Title}}</a></strong>
+            <span>#{{.ID}}</span>
+        </div>
+        <pre><code>{{.Content}}</code></pre>
+    </div>
+    <br>
+    {{end}}
+</ul>
+{{else if .Search}}
+<p>Not found.</p>
+{{end}}
+{{end}}
